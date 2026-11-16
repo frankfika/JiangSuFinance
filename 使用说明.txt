@@ -1,0 +1,20 @@
+江苏财政厅 AI 课 · 第一次课 · 交互讲义项目
+================================================
+
+【讲课用】双击「启动财政厅AI课讲义.command」
+  - 自动启动本地服务并打开浏览器
+  - 讲课期间保持终端窗口开着，讲完关闭窗口即停止
+
+【发学员】直接用线上版（手机也能开）：
+  https://i46yyjagzfrma.ok.kimi.link
+
+【打印/存档】用 PDF：江苏财政厅-第一次课-交互讲义-116页.pdf
+
+【改内容】源码在 app/ 目录：
+  - app/index.html          页面骨架与样式
+  - app/src/slides/         每页正文（batch1.js ~ batch19.js）
+  - app/images/             截图与配图
+  - 改完重新导出 PDF：先 cd app && python3 -m http.server 8371，
+    再运行 python3 app/print_pdf.py（需先装好 Chrome）
+
+【原始文稿】两个 .md 文件是 PPT 正文与讲稿的事实源

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="fonts.css" />
+<style>
+  :root{--bg:#05070a;--ink:#f2f5f8;--muted:#8b96a3;--accent:#3ddc97;--accent2:#5b8cff;--line:rgba(255,255,255,.085)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--ink);
+    font-family:'Inter','Noto SC','PingFang SC',sans-serif;position:relative}
+  .grid{position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:96px 96px;
+    -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 45%,#000 20%,transparent 80%);
+    mask-image:radial-gradient(ellipse 85% 75% at 50% 45%,#000 20%,transparent 80%);
+    opacity:0;animation:fadeIn 1s ease .1s forwards}
+  .glow{position:absolute;width:1200px;height:1200px;border-radius:50%;left:50%;top:48%;
+    transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(61,220,151,.13),transparent 62%);
+    filter:blur(60px);opacity:0;animation:glowIn 2.2s cubic-bezier(.2,.7,.2,1) .15s forwards}
+  @keyframes fadeIn{to{opacity:1}}
+  @keyframes glowIn{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:0 140px;text-align:center}
+  .eyebrow{display:flex;align-items:center;gap:18px;font-family:'JetBrains Mono',monospace;font-size:21px;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:34px;
+    opacity:0;transform:translateY(26px);animation:up .9s cubic-bezier(.16,1,.3,1) .25s forwards}
+  .eyebrow .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent);
+    animation:pulse 1.8s ease-in-out infinite}
+  .eyebrow .bar{width:76px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  @keyframes up{to{opacity:1;transform:translateY(0)}}
+
+  h2{font-family:'Noto SC',sans-serif;font-weight:800;font-size:78px;line-height:1.2;letter-spacing:-.015em;
+    max-width:1400px;opacity:0;transform:translateY(30px);animation:up 1s cubic-bezier(.16,1,.3,1) .38s forwards}
+
+  .steps{display:flex;align-items:stretch;gap:18px;margin-top:70px;width:100%;max-width:1660px}
+  .step{flex:1;padding:30px 20px 34px;border-radius:18px;border:1px solid rgba(255,255,255,.10);
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));position:relative;
+    opacity:0;transform:translateY(34px);animation:cardIn .8s cubic-bezier(.16,1,.3,1) forwards}
+  .step:nth-child(1){animation-delay:.7s}
+  .step:nth-child(2){animation-delay:.82s}
+  .step:nth-child(3){animation-delay:.94s}
+  .step:nth-child(4){animation-delay:1.06s}
+  .step:nth-child(5){animation-delay:1.18s}
+  @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+  .step .num{font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:700;
+    background:linear-gradient(180deg,#fff,#7e8b99);-webkit-background-clip:text;background-clip:text;color:transparent;
+    line-height:1;margin-bottom:16px}
+  .step .nm{font-family:'Noto SC',sans-serif;font-size:27px;font-weight:700;margin-bottom:9px}
+  .step .ds{font-family:'Noto SC',sans-serif;font-size:18px;color:var(--muted);line-height:1.55}
+  .step.hl{border-color:rgba(61,220,151,.45);background:linear-gradient(180deg,rgba(61,220,151,.12),rgba(61,220,151,.03))}
+  .step.hl .num{background:linear-gradient(180deg,#9df3cd,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .step.hl .nm{color:var(--accent)}
+
+  .foot{margin-top:58px;font-family:'Noto SC',sans-serif;font-size:24px;color:var(--muted);
+    opacity:0;animation:up .9s cubic-bezier(.16,1,.3,1) 1.45s forwards}
+  .foot b{color:var(--ink);font-weight:700}
+  .foot .mono{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:22px}
+
+  .corner{position:absolute;width:28px;height:28px;border:1px solid rgba(61,220,151,.5);opacity:0;
+    animation:fadeIn .8s ease 1.6s forwards}
+  .c-tl{left:54px;top:54px;border-right:0;border-bottom:0}
+  .c-tr{right:54px;top:54px;border-left:0;border-bottom:0}
+  .c-bl{left:54px;bottom:54px;border-right:0;border-top:0}
+  .c-br{right:54px;bottom:54px;border-left:0;border-top:0}
+</style>
+</head>
+<body data-duration="6">
+  <div class="grid"></div><div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span><span class="bar"></span>THE MATCH GAME</div>
+    <h2>五关测出你们有多合拍</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="nm">命理</div><div class="ds">星座 + 八字<br/>互补还是相冲</div></div>
+      <div class="step"><div class="num">2</div><div class="nm">性格</div><div class="ds">16 型人格<br/>Frank 会怎么选</div></div>
+      <div class="step"><div class="num">3</div><div class="nm">脑力</div><div class="ds">4 道推理题<br/>答案最后公布</div></div>
+      <div class="step"><div class="num">4</div><div class="nm">认知</div><div class="ds">3 个情景<br/>看你怎么判断</div></div>
+      <div class="step hl"><div class="num">5</div><div class="nm">一句话</div><div class="ds">AI 打气场分<br/>识别提示词注入</div></div>
+    </div>
+    <div class="foot">匹配度 <b>≥ 70 分</b> 解锁微信 · 生日只用于这一次计算，<b>不存储</b> · 分享卡 <span class="mono">1080×1350</span></div>
+  </div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div>
+  <div class="corner c-bl"></div><div class="corner c-br"></div>
+</body>
+</html>

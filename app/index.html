@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>财政厅 AI 课 · 交互讲义（试看 5 页）</title>
+<style>
+  :root{
+    --paper:#f7f5f0; --paper2:#efece6; --paper3:#e9e5dd;
+    --ink:#1b1a18; --ink2:#4f4b45; --muted:#77726a;
+    --red:#c8442f; --green:#4f7a5a; --line:#e0dcd5;
+    --hand:Georgia,"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif;
+    --sans:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --script:"Snell Roundhand","Bradley Hand","Segoe Script",cursive;
+    --ease:cubic-bezier(.22,.8,.28,1);
+    --longshot-h:560px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans); color:var(--ink); background:var(--paper3);
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  /* ---- 纸面 ---- */
+  .deck{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:24px;}
+  .slide{
+    position:absolute; inset:24px; max-width:1180px; max-height:calc(100% - 48px); margin:auto;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(27,26,24,.025), transparent 42%),
+      radial-gradient(circle at 85% 88%, rgba(200,68,47,.03), transparent 46%);
+    border:1px solid var(--line); border-radius:6px;
+    box-shadow:0 1px 0 #fff inset, 0 14px 44px rgba(27,26,24,.10), 0 2px 8px rgba(27,26,24,.06);
+    padding:56px 64px 72px; overflow-y:auto;
+    opacity:0; visibility:hidden; transform:translateY(14px) scale(.985);
+    transition:opacity .45s var(--ease), transform .45s var(--ease), visibility 0s linear .45s;
+  }
+  .slide.active{opacity:1; visibility:visible; transform:none; transition-delay:0s}
+  .slide::before{ /* 装订线 */
+    content:""; position:absolute; left:34px; top:0; bottom:0; width:1px; background:var(--line);
+  }
+  .kicker{font-family:var(--script); color:var(--red); font-size:20px; letter-spacing:.02em; margin-bottom:10px}
+  .meta-corner{position:absolute; top:22px; right:28px; font-size:12px; color:var(--muted); letter-spacing:.14em}
+  h1{font-family:var(--hand); font-weight:700; letter-spacing:.01em}
+  h2{font-family:var(--hand); font-size:34px; line-height:1.3; margin-bottom:8px}
+  .sub{color:var(--muted); font-size:15px; margin-bottom:28px}
+  p,li{font-size:16px; line-height:1.75}
+  .hand{font-family:var(--hand)}
+  .red{color:var(--red)} .green{color:var(--green)} .muted{color:var(--muted)}
+
+  /* ---- 入场 stagger ---- */
+  .rise{opacity:0; transform:translateY(12px); transition:opacity .5s var(--ease), transform .5s var(--ease)}
+  .slide.active .rise{opacity:1; transform:none}
+  .slide.active .rise:nth-child(1){transition-delay:.08s}.slide.active .rise:nth-child(2){transition-delay:.16s}
+  .slide.active .rise:nth-child(3){transition-delay:.24s}.slide.active .rise:nth-child(4){transition-delay:.32s}
+  .slide.active .rise:nth-child(5){transition-delay:.40s}.slide.active .rise:nth-child(6){transition-delay:.48s}
+  .slide.active .rise:nth-child(7){transition-delay:.56s}.slide.active .rise:nth-child(8){transition-delay:.64s}
+
+  /* ---- 印章 ---- */
+  .seal{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:var(--hand); color:var(--red); border:2px solid var(--red);
+    border-radius:6px; padding:6px 12px; font-size:15px; letter-spacing:.2em; text-indent:.2em;
+    transform:rotate(-6deg) scale(2.2); opacity:0;
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.3 -0.12'/%3E%3C/filter%3E%3Crect width='120' height='60' filter='url(%23n)'/%3E%3C/svg%3E");
+    mask-size:cover;
+  }
+  .seal.green{color:var(--green); border-color:var(--green)}
+  .seal.ink{color:var(--ink2); border-color:var(--ink2)}
+  .slide.active .seal.stamp, .seal.stamp{animation:stamp .5s var(--ease) .5s both}
+  @keyframes stamp{
+    0%{transform:rotate(-14deg) scale(2.2); opacity:0}
+    55%{transform:rotate(-5deg) scale(.94); opacity:1}
+    75%{transform:rotate(-7deg) scale(1.04)}
+    100%{transform:rotate(-6deg) scale(1); opacity:.92}
+  }
+
+  /* ---- P1 封面 ---- */
+  .cover{display:flex; flex-direction:column; justify-content:center; min-height:100%}
+  .cover .org{font-size:15px; letter-spacing:.3em; color:var(--ink2); margin-bottom:26px}
+  .cover h1{font-size:52px; line-height:1.25; margin-bottom:14px}
+  .cover .lesson{font-family:var(--hand); font-size:22px; color:var(--red); margin-bottom:34px}
+  .cover .tag{font-size:17px; color:var(--ink2); border-left:3px solid var(--red); padding-left:14px; line-height:1.8}
+  .cover .seal{align-self:flex-start; margin-top:44px}
+  .cover .foot{margin-top:56px; font-size:13px; color:var(--muted); display:flex; gap:24px; flex-wrap:wrap}
+
+  /* ---- P2 目录 ---- */
+  .toc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:8px}
+  .toc-card{
+    position:relative; background:var(--paper2); border:1px solid var(--line); border-radius:5px;
+    padding:18px 16px 16px; cursor:pointer; text-align:left; font:inherit; color:inherit;
+    transition:transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s;
+  }
+  .toc-card:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(27,26,24,.10); border-color:#d5cfc4}
+  .toc-card:active{transform:translateY(-1px)}
+  .toc-card:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .toc-num{font-family:var(--hand); font-size:26px; color:var(--red)}
+  .toc-name{font-size:15px; font-weight:600; margin-top:6px; line-height:1.5}
+  .toc-hint{font-size:12px; color:var(--muted); margin-top:8px; min-height:16px}
+  .toc-card .go{position:absolute; top:12px; right:12px; font-size:11px; color:var(--red); border:1px solid var(--red); border-radius:99px; padding:2px 8px; opacity:.85}
+
+  /* ---- 表格 ---- */
+  table{width:100%; border-collapse:collapse; font-size:15px; background:transparent}
+  th{font-family:var(--hand); text-align:left; font-size:16px; padding:10px 12px; border-bottom:2px solid var(--ink); white-space:nowrap}
+  td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.6}
+  tbody tr{transition:background .15s}
+  tbody tr:hover{background:var(--paper2)}
+  .oneline{font-family:var(--hand); font-size:20px; margin-top:26px; display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+
+  /* ---- P4 判断卡片 ---- */
+  .quiz-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+  .quiz{
+    position:relative; background:var(--paper2); border:1px solid var(--line); border-radius:5px;
+    padding:14px 16px; cursor:pointer; min-height:74px; display:flex; align-items:center; gap:12px;
+    font:inherit; color:inherit; text-align:left; width:100%;
+    transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .quiz:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(27,26,24,.08)}
+  .quiz:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .quiz .q{font-size:14.5px; line-height:1.6; flex:1}
+  .quiz .idx{font-family:var(--hand); color:var(--muted); font-size:15px}
+  .quiz .ans{
+    flex-shrink:0; width:64px; text-align:center; font-family:var(--hand); font-size:14px;
+    color:var(--muted); border:1px dashed #cfc9bd; border-radius:5px; padding:6px 4px;
+    transition:all .25s var(--ease);
+  }
+  .quiz.revealed .ans{border-style:solid; font-size:15px}
+  .quiz.revealed .ans.rule{color:var(--red); border-color:var(--red); transform:rotate(-4deg)}
+  .quiz.revealed .ans.llm{color:var(--green); border-color:var(--green); transform:rotate(3deg)}
+  .quiz.revealed .ans.ml{color:var(--ink2); border-color:var(--ink2); transform:rotate(-2deg)}
+  .quiz-note{margin-top:14px; font-size:13.5px; color:var(--muted)}
+  .quiz-progress{font-family:var(--hand); font-size:16px; margin-top:16px}
+  .quiz-progress b{color:var(--red)}
+
+  /* ---- P5 模型表 ---- */
+  .filter-bar{display:flex; gap:10px; margin:6px 0 14px; align-items:center; flex-wrap:wrap}
+  .chip{
+    font:inherit; font-size:13px; padding:6px 14px; border-radius:99px; cursor:pointer;
+    border:1px solid var(--line); background:var(--paper2); color:var(--ink2);
+    transition:all .18s var(--ease);
+  }
+  .chip:hover{border-color:#d0c9bc}
+  .chip:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .chip.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .src-toggle{opacity:.35; filter:grayscale(.4)}
+  .ext{font-size:11.5px; color:var(--muted); text-decoration:none; border-bottom:1px dashed var(--muted); display:inline-block; margin-top:4px; transition:color .15s}
+  .ext:hover{color:var(--red); border-bottom-color:var(--red)}
+  .cover .foot a{color:var(--ink2); text-decoration:none; border-bottom:1px dashed var(--muted); transition:color .15s}
+  .cover .foot a:hover{color:var(--red); border-bottom-color:var(--red)}
+  .src-line{margin-top:10px; font-size:12.5px}
+  .src-line a{color:var(--muted); text-decoration:none; border-bottom:1px dashed var(--muted); transition:color .15s}
+  .src-line a:hover{color:var(--red); border-bottom-color:var(--red)}
+  /* ---- slidekit 部件 ---- */
+  .blist{list-style:none; margin:4px 0 10px}
+  .blist li{position:relative; padding:7px 0 7px 22px; border-bottom:1px dashed var(--line); line-height:1.7}
+  .blist li::before{content:""; position:absolute; left:2px; top:17px; width:8px; height:8px; background:var(--red); border-radius:2px; transform:rotate(45deg)}
+  .cardrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin:8px 0 12px}
+  .minicard{background:var(--paper2); border:1px solid var(--line); border-radius:5px; padding:16px 16px 14px}
+  .mc-n{font-family:var(--hand); font-size:24px; color:var(--red)}
+  .mc-t{font-weight:600; font-size:15px; margin:4px 0 6px; font-family:var(--hand)}
+  .mc-b{font-size:13px; color:var(--ink2); line-height:1.7}
+  .shot{margin:10px 0 14px}
+  .shot img{max-width:100%; max-height:540px; border:1px solid var(--line); border-radius:5px; display:block}
+  .shot figcaption{font-size:12px; color:var(--muted); margin-top:6px}
+  .shotrow{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:10px 0 14px}
+  .shotrow figure{margin:0}
+  .shotrow img{width:100%; max-height:360px; object-fit:contain; object-position:top; background:var(--paper2); border:1px solid var(--line); border-radius:5px; display:block}
+  .shotrow figcaption{font-size:12px; color:var(--muted); margin-top:5px}
+  @media (max-width:640px){.shotrow{grid-template-columns:1fr}}
+  /* ---- 长截图分栏 ---- */
+  .longshot{display:flex; gap:6px; margin:10px 0 4px; width:100%; box-sizing:border-box}
+  .longshot img{border:1px solid var(--line); border-radius:5px; display:block; box-sizing:border-box}
+  /* ---- 架构分层图 ---- */
+  .arch{margin:10px 0 14px; border:1px solid var(--line); border-radius:5px; overflow:hidden}
+  .arch .layer{display:flex; gap:12px; align-items:baseline; padding:8px 14px; border-bottom:1px dashed var(--line); background:var(--paper2)}
+  .arch .layer:last-child{border-bottom:none}
+  .arch .layer b{white-space:nowrap; color:var(--red); font-size:14px}
+  .arch .layer span{font-size:13px; color:var(--ink2); line-height:1.6}
+  .arch .flow{padding:4px 14px; text-align:center; color:var(--muted); font-size:12px; letter-spacing:3px; background:var(--paper)}
+  .arch .flow i{font-style:normal}
+  tr.hide{display:none}
+  .cmt{font-size:12.5px; color:var(--muted); display:none; padding-top:4px}
+  tr.open .cmt{display:block}
+  tbody tr{cursor:pointer}
+  .badge{display:inline-block; font-size:11px; border:1px solid; border-radius:99px; padding:1px 8px; margin-left:6px; vertical-align:1px}
+  /* ---- P6 GPU 拆解 ---- */
+  .gpu-wrap{display:grid; grid-template-columns:1fr 1.15fr; gap:28px; margin-top:6px; align-items:start}
+  .gpu-svg{background:var(--paper2); border:1px solid var(--line); border-radius:6px; padding:14px}
+  .gpu-svg svg{width:100%; height:auto; display:block}
+  .hotspot{cursor:pointer}
+  .hotspot circle:first-child{fill:transparent}
+  .hotspot circle[fill="#c8442f"]{transition:transform .18s var(--ease); transform-origin:center; transform-box:fill-box}
+  .hotspot:hover circle[fill="#c8442f"]{transform:scale(1.12)}
+  .hotspot.hot circle[fill="#c8442f"]{animation:pulse-ring 1.6s var(--ease) infinite}
+  @keyframes pulse-ring{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+  .gpu-tab{
+    display:block; width:100%; text-align:left; font:inherit; color:inherit; cursor:pointer;
+    background:var(--paper2); border:1px solid var(--line); border-radius:5px; padding:12px 16px; margin-bottom:10px;
+    transition:all .18s var(--ease);
+  }
+  .gpu-tab:hover{border-color:#d0c9bc; transform:translateX(3px)}
+  .gpu-tab:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .gpu-tab b{display:block; font-family:var(--hand); font-size:17px; margin-bottom:4px}
+  .gpu-tab span{display:block; font-size:13.5px; color:var(--muted); line-height:1.65; max-height:0; overflow:hidden; opacity:0; transition:all .3s var(--ease)}
+  .gpu-tab.on{border-color:var(--red); border-left:3px solid var(--red)}
+  .gpu-tab.on span{max-height:120px; opacity:1; margin-top:6px}
+  .gpu-price{margin-top:18px; border-top:2px solid var(--ink); padding-top:12px}
+  .gpu-price .hand{font-size:16px; display:block; margin-bottom:8px}
+  .price-row{border-bottom:1px dashed var(--line); padding:7px 2px; font-size:13.5px; color:var(--ink2); line-height:1.6}
+  .price-row.red{color:var(--red); font-weight:600}
+  @media (max-width:900px){.gpu-wrap{grid-template-columns:1fr}}
+  .badge.o{color:var(--green); border-color:var(--green)}
+  .badge.c{color:var(--red); border-color:var(--red)}
+  .fineprint{font-size:12.5px; color:var(--muted); margin-top:14px; line-height:1.7}
+
+  /* ---- 导航 ---- */
+  .hud{position:fixed; left:0; right:0; bottom:0; z-index:10; display:flex; align-items:center; gap:16px;
+    padding:14px 28px; font-size:13px; color:var(--muted);
+    background:linear-gradient(to top, var(--paper3) 60%, transparent);}
+  .hud .bar{flex:1; height:2px; background:#ddd7cb; position:relative; border-radius:2px}
+  .hud .bar i{position:absolute; left:0; top:0; bottom:0; background:var(--ink); width:0; transition:width .4s var(--ease)}
+  .navbtn{
+    width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--paper);
+    font-size:18px; color:var(--ink); cursor:pointer; display:grid; place-items:center;
+    transition:all .18s var(--ease);
+  }
+  .navbtn:hover:not(:disabled){border-color:var(--ink); transform:translateY(-2px)}
+  .navbtn:disabled{opacity:.3; cursor:default}
+  .navbtn:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .hud .pg{font-family:var(--hand); font-size:15px; color:var(--ink); min-width:74px; text-align:center}
+  .jump{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted)}
+  .jump input{width:58px; padding:7px 8px; border:1px solid var(--line); border-radius:6px; background:var(--paper);
+    font-family:var(--hand); font-size:14px; color:var(--ink); text-align:center}
+  .jump input:focus{outline:2px solid var(--red); outline-offset:1px}
+  .pagefoot{position:absolute; right:34px; bottom:16px; font-size:12px; color:var(--muted);
+    font-family:var(--hand); letter-spacing:.04em; z-index:2}
+  .pagefoot b{color:var(--red); font-weight:normal}
+  .arch{margin:14px 0}
+  .arch svg{width:100%; height:auto; display:block; background:#fdfcf8; border:1px solid var(--line); border-radius:6px}
+  .kbd-hint{position:fixed; right:28px; top:18px; z-index:10; font-size:11.5px; color:var(--muted); letter-spacing:.06em}
+  @media (max-width:900px){
+    .slide{padding:40px 26px 64px; inset:12px; max-height:calc(100% - 24px)}
+    .slide::before{display:none}
+    .toc-grid{grid-template-columns:repeat(2,1fr)}
+    .quiz-grid{grid-template-columns:1fr}
+    .cover h1{font-size:34px}
+    h2{font-size:26px}
+    .kbd-hint{display:none}
+    table{font-size:13px}
+    th,td{padding:8px 8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+    .rise,.seal{opacity:1 !important; transform:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="kbd-hint">← → 翻页 · 空格 下一页 · 数字键 1–6 直达</div>
+
+<div class="deck" id="deck">
+
+  <!-- P1 封面 -->
+  <section class="slide active" data-title="封面">
+    <div class="meta-corner">讲义 · 第一次课 · 全本 100+ 页</div>
+    <div class="cover">
+      <div class="org rise">江 苏 省 财 政 厅 · 生 成 式 人 工 智 能 应 用 培 训</div>
+      <h1 class="rise">让 AI 进入你的<br/>工作和生活</h1>
+      <div class="lesson rise">第一次课　人工智能与大模型基础</div>
+      <div class="tag rise">这节课不教大家写代码。<br/>我们建立一个判断框架：以后不管 AI 怎么变，<br/>你都能自己判断——这件事能不能交给它、该交给哪一款、出了问题谁负责。</div>
+      <span class="seal stamp rise">开　讲</span>
+      <div class="foot rise"><a href="https://www.frankfika.com/" target="_blank" rel="noopener noreferrer">讲师主页 frankfika.com ↗</a><span>不需要任何代码基础</span><span>数字与价格截至 2026 年 11 月</span></div>
+    </div>
+  </section>
+
+  <!-- P1.5 开篇演示 -->
+  <section class="slide" data-title="开篇演示：一个能聊天的我">
+    <div class="kicker rise">Opening demo · 73 秒</div>
+    <h2 class="rise">先看一段视频，别问它是怎么做的</h2>
+    <p class="sub rise">这是一个真实在运行的网站，不是 PPT、不是动画。看到什么先记在心里——看完我们再说它是怎么来的。</p>
+    <div class="rise" style="margin:6px 0 10px">
+      <video controls preload="metadata" poster="assets/frankfika-demo-poster.jpg" src="assets/frankfika-demo-web.mp4" style="width:100%; max-height:56vh; background:#000; border:1px solid var(--line); border-radius:6px; display:block"></video>
+      <p style="font-size:12px; color:var(--muted); margin-top:6px">▶ 点击播放（73 秒，有声音）。如打不开，直接访问 frankfika.com 现场体验。</p>
+    </div>
+    <div class="oneline rise"><span>视频先看到这儿——下一页，这个网站就在你手边。</span><span class="seal stamp">先记住画面</span></div>
+  </section>
+
+  <!-- P1.6 官网现场 -->
+  <section class="slide" data-title="官网现场：打开 frankfika.com">
+    <div class="kicker rise">Try it live</div>
+    <h2 class="rise">官网就在这儿，当场打开</h2>
+    <p class="sub rise">视频可以剪辑，现场演不了。点下面的图或按钮，在新窗口打开这个网站，亲手和里面的 AI 分身聊两句——问它任何关于讲师的问题。</p>
+    <div class="rise" style="margin:6px 0 10px">
+      <a href="https://www.frankfika.com/" target="_blank" rel="noopener noreferrer" title="在新窗口打开 frankfika.com">
+        <img src="assets/frankfika-site.png" alt="frankfika.com 官网首页实拍" style="width:100%; max-height:50vh; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:6px; display:block"/>
+      </a>
+      <p style="font-size:12px; color:var(--muted); margin-top:6px">↑ 官网首页实拍（点击大图在新窗口打开）。底部那个输入框，就是视频里的 AI 分身。</p>
+    </div>
+    <div style="text-align:center; margin-top:4px" class="rise">
+      <a href="https://www.frankfika.com/" target="_blank" rel="noopener noreferrer" style="display:inline-block; font-size:17px; font-family:var(--hand); color:var(--paper); background:var(--ink); padding:12px 34px; border-radius:99px; text-decoration:none">打开 frankfika.com ↗</a>
+    </div>
+  </section>
+
+  <!-- P1.7 分身实录 -->
+  <section class="slide" data-title="分身实录：官网的真实操作">
+    <div class="kicker rise">Screen recording · 61 秒</div>
+    <h2 class="rise">另一条记录：官网的真实操作</h2>
+    <p class="sub rise">从打开网页、滚动全站，到测缘分五关通关——全程录屏，没有剧本。注意看每一个细节是不是"真在运行"。</p>
+    <div class="rise" style="margin:6px 0 10px">
+      <video controls preload="metadata" poster="assets/frank-twin-poster.jpg" src="assets/frank-twin-demo-a.mp4" style="width:100%; max-height:56vh; background:#000; border:1px solid var(--line); border-radius:6px; display:block"></video>
+      <p style="font-size:12px; color:var(--muted); margin-top:6px">▶ 点击播放（61 秒，有声音）。这段录屏是怎么做出来的，讲到智能体那一节再揭晓。</p>
+    </div>
+    <div class="oneline rise"><span>一个能聊天的网站 + 一段没人操作的录屏——AI 已经能做到这两件事。</span><span class="seal stamp green">真的在跑</span></div>
+  </section>
+
+  <!-- P2 八块内容 -->
+  <section class="slide" data-title="今天八块内容">
+    <div class="kicker rise">Today's map</div>
+    <h2 class="rise">今天八块内容</h2>
+    <p class="sub rise">本节目标：建立正确认知，为第二次动手、第三次进阶打底。点卡片直达这一节。</p>
+    <div class="toc-grid rise" id="toc"></div>
+  </section>
+
+  <!-- P3 四阶段对照 -->
+  <section class="slide" data-title="四阶段对照">
+    <div class="kicker rise">From rules to LLMs</div>
+    <h2 class="rise">四个阶段，一张表</h2>
+    <p class="sub rise">规则系统 → 机器学习 → 深度学习 → 大模型：各阶段大致解决了什么问题。</p>
+    <table class="rise">
+      <thead><tr><th>阶段</th><th>大致做法</th><th>主要解决什么</th><th>财政里怎么理解</th></tr></thead>
+      <tbody>
+        <tr><td class="hand">规则系统</td><td>人写死规则</td><td>标准明确、可复核的重复判断</td><td>校验、对账、按条件拦截</td></tr>
+        <tr><td class="hand">机器学习</td><td>从历史数据找规律</td><td>难以写死规则的分类、识别、预测</td><td>异常线索辅助，结论人下</td></tr>
+        <tr><td class="hand">深度学习</td><td>大规模数据里自己抽特征</td><td>语音、图像、文字等感知理解</td><td>为大模型打基础</td></tr>
+        <tr><td class="hand">大模型</td><td>海量文字训练通用模型</td><td>读、写、归纳、起草</td><td>辅助写材料，不替代审核签发</td></tr>
+      </tbody>
+    </table>
+    <div class="oneline rise"><span>规则管住不该过的，大模型帮忙写出还得改的。</span><span class="seal stamp">记住这句</span></div>
+  </section>
+
+  <!-- P4 互动判断 -->
+  <section class="slide" data-title="课堂互动">
+    <div class="kicker rise">Hands up &amp; guess</div>
+    <h2 class="rise">哪件事像规则，哪件事像大模型？</h2>
+    <p class="sub rise">先在心里判断，再点开看答案。十件事，都来自财政办公的日常。</p>
+    <div class="quiz-grid rise" id="quiz"></div>
+    <div class="quiz-progress rise">已揭开 <b id="quizCount">0</b> / 10　<span class="muted" style="font-size:13px">（有两题的答案是"机器学习"，看看你能不能找出来）</span></div>
+  </section>
+
+  <!-- P5 模型巡礼 -->
+  <section class="slide" data-title="模型巡礼总表">
+    <div class="kicker rise">Model tour · Nov 2026</div>
+    <h2 class="rise">典型模型总表 <span style="font-size:16px; color:var(--muted)">（截至 2026 年 11 月，以当天菜单为准）</span></h2>
+    <div class="filter-bar rise">
+      <button class="chip on" data-f="all">全部</button>
+      <button class="chip" data-f="open">只看开源</button>
+      <button class="chip" data-f="closed">只看闭源</button>
+      <span class="muted" style="font-size:12.5px">点任意一行展开一句话点评</span>
+    </div>
+    <table class="rise" id="models">
+      <thead><tr><th>厂商</th><th>当前旗舰</th><th>一句话特点</th><th>开闭源</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="fineprint rise">两点：2026 年秋季是史上最密集的发版季，这张表的"最新"有效期只有几个月——记方法比记型号重要；开源头部基本被中国厂商包揽。各厂商官网链接见表内，价格以当天页面为准。</p>
+    <div class="oneline rise"><span class="seal stamp green">以当天菜单为准</span></div>
+  </section>
+
+  <!-- P6 算力卡拆解 -->
+  <section class="slide" data-title="算力卡里面都有什么">
+    <div class="kicker rise">Anatomy of an AI GPU</div>
+    <h2 class="rise">算力卡里面都有什么？<span style="font-size:16px; color:var(--muted)">点卡上的编号，看每个部件值多少钱、卡在哪儿</span></h2>
+    <div class="gpu-wrap rise">
+      <div class="gpu-svg">
+        <svg viewBox="0 0 420 300" aria-label="GPU 结构示意图">
+          <!-- 电路板 -->
+          <rect x="8" y="8" width="404" height="284" rx="14" fill="#e9e5dd" stroke="#d5cfc4" stroke-width="2"/>
+          <rect x="24" y="120" width="26" height="60" rx="4" fill="#d9d4cc" stroke="#c9c2b5"/><!-- 金手指 -->
+          <text x="37" y="196" font-size="10" fill="#77726a" text-anchor="middle">PCIe</text>
+          <!-- 主芯片 -->
+          <rect x="150" y="95" width="120" height="110" rx="8" fill="#1b1a18"/>
+          <text x="210" y="144" font-size="12" fill="#f7f5f0" text-anchor="middle" font-family="Georgia,serif">计算</text>
+          <text x="210" y="162" font-size="12" fill="#f7f5f0" text-anchor="middle" font-family="Georgia,serif">核心</text>
+          <!-- HBM 颗粒（环绕主芯片） -->
+          <g fill="#4f4b45">
+            <rect x="152" y="72" width="26" height="14" rx="2"/><rect x="182" y="72" width="26" height="14" rx="2"/><rect x="212" y="72" width="26" height="14" rx="2"/><rect x="242" y="72" width="26" height="14" rx="2"/>
+            <rect x="152" y="214" width="26" height="14" rx="2"/><rect x="182" y="214" width="26" height="14" rx="2"/><rect x="212" y="214" width="26" height="14" rx="2"/><rect x="242" y="214" width="26" height="14" rx="2"/>
+            <rect x="130" y="102" width="14" height="22" rx="2"/><rect x="130" y="130" width="14" height="22" rx="2"/><rect x="130" y="158" width="14" height="22" rx="2"/>
+            <rect x="276" y="102" width="14" height="22" rx="2"/><rect x="276" y="130" width="14" height="22" rx="2"/><rect x="276" y="158" width="14" height="22" rx="2"/>
+          </g>
+          <!-- NVLink 互联 -->
+          <path d="M300 40 C 350 40 356 90 356 130" fill="none" stroke="#c8442f" stroke-width="3" stroke-dasharray="6 5"/>
+          <path d="M356 170 C 356 210 350 258 300 258" fill="none" stroke="#c8442f" stroke-width="3" stroke-dasharray="6 5"/>
+          <text x="382" y="152" font-size="11" fill="#c8442f" text-anchor="middle">NVLink</text>
+          <rect x="346" y="136" width="20" height="32" rx="4" fill="#c8442f" opacity=".85"/>
+          <!-- 热点标记 -->
+          <g class="hotspot" data-part="0"><circle cx="210" cy="150" r="30" fill="transparent"/><circle cx="210" cy="150" r="17" fill="#c8442f"/><text x="210" y="155" font-size="16" fill="#fff" text-anchor="middle" font-family="Georgia,serif">1</text></g>
+          <g class="hotspot" data-part="1"><circle cx="240" cy="79" r="15" fill="#c8442f"/><text x="240" y="84" font-size="14" fill="#fff" text-anchor="middle" font-family="Georgia,serif">2</text></g>
+          <g class="hotspot" data-part="2"><circle cx="356" cy="120" r="15" fill="#c8442f"/><text x="356" y="125" font-size="14" fill="#fff" text-anchor="middle" font-family="Georgia,serif">3</text></g>
+        </svg>
+      </div>
+      <div class="gpu-info">
+        <button class="gpu-tab on" data-part="0"><b>1 · Tensor Core 计算核心</b><span>AI 计算的 99% 是矩阵乘法，就靠它。芯片面积的绝对主力，B300 一整代产品线的核心。</span></button>
+        <button class="gpu-tab" data-part="1"><b>2 · HBM 高带宽显存</b><span>B300 配 288GB、带宽 12TB/s。生成速度的瓶颈往往不是算得快不快，是"喂数据"快不快——这正是被三星、SK 海力士、美光三家卡脖子的地方。</span></button>
+        <button class="gpu-tab" data-part="2"><b>3 · NVLink 卡间互联</b><span>单卡装不下万亿参数，要几十上百张卡协同。B300 的 NVLink 5.0 双向 1.8TB/s——互联带宽不够，一百张卡可能只顶三十张用。</span></button>
+        <div class="gpu-price"><span class="hand">价格（2026 年 11 月）</span>
+          <div class="price-row"><i>单卡约 3–6 万美元</i></div>
+          <div class="price-row"><i>8 卡整机出厂约 55 万美元</i></div>
+          <div class="price-row red"><i>禁售下国内非正规渠道整机一度报到 700 万–1400 万元人民币，月租约 19 万</i></div>
+          <div class="price-row"><i>单卡功耗约 1200–1400W，8 卡整机一天约 350 度电</i></div>
+          <div class="src-line">来源：<a href="https://www.nvidia.com/en-us/data-center/dgx-b300/" target="_blank" rel="noopener noreferrer">NVIDIA DGX B300 官方产品页 ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- P120 课后行动：AI 大赛报名 -->
+  <section class="slide" data-title="课后就能试：报名 AI 大赛">
+    <div class="kicker rise">Try it after class</div>
+    <h2 class="rise">不写代码，也能报名一场 AI 大赛</h2>
+    <p class="sub rise">WAIC 2026 OPC 独立先锋挑战赛——世界人工智能大会首次为"一人公司"和"超级个体"打造的赛事：WAIC Future Tech 承办、OpenCSG 联合承办。报名要交的不是代码，是一段 Demo 演示。</p>
+    <div class="gpu-wrap rise">
+      <div>
+        <ul class="blist">
+          <li><b>创新赛道 · 零门槛</b>：全程线上、不限地区、<b>无需代码基础</b>——Prompt / Skill / 模型微调三大子赛道；100 件优秀作品登上 WAIC 主会场展示墙，获奖者现场颁奖</li>
+          <li><b>创业赛道 · 三轮晋级</b>：不限行业与技术栈，<b>提交 Demo 演示（PPT 或视频）即可报名</b>——网络初赛 → 城市复赛 → 7 月上海 WAIC 总决赛</li>
+        </ul>
+        <table class="rise">
+          <thead><tr><th>2026 总决赛金奖代表（8 强节选）</th><th>方向</th></tr></thead>
+          <tbody>
+            <tr><td>上海 ChopInsight</td><td>REITs 智能投研 Agent</td></tr>
+            <tr><td>北京 Lumoverse</td><td>数字生命体游戏世界</td></tr>
+            <tr><td>西安 Corvia AI</td><td>企业 Agent 框架</td></tr>
+          </tbody>
+        </table>
+              </div>
+      <div>
+        <div class="shotrow" style="margin:0 0 8px">
+          <figure class="shot" style="margin:0">
+            <img src="images/frank-waic-1.jpg" alt="WAIC OPC 全国总决赛颁奖合影" style="max-height:160px; object-fit:cover; object-position:top"/>
+            <figcaption>2026 年 WAIC OPC 全国决赛：评委与金奖团队合影（上海）</figcaption>
+          </figure>
+          <figure class="shot" style="margin:0">
+            <img src="images/frank-waic-2.jpg" alt="WAIC OPC 决赛项目展板墙" style="max-height:160px; object-fit:cover; object-position:top"/>
+            <figcaption>总决赛路演现场的项目展板墙</figcaption>
+          </figure>
+        </div>
+        <div class="shotrow" style="margin:0">
+          <figure class="shot" style="margin:0">
+            <img src="images/waic-venue.jpg" alt="WAIC 2026 会场外景" style="max-height:120px; object-fit:cover"/>
+            <figcaption>WAIC 2026 会场外景（上海）。（澎湃新闻·视觉中国）</figcaption>
+          </figure>
+          <figure class="shot" style="margin:0">
+            <img src="images/waic-robots.jpg" alt="WAIC 2026 会场人形机器人擂台" style="max-height:120px; object-fit:cover"/>
+            <figcaption>会场内的人形机器人擂台。（澎湃新闻·视觉中国）</figcaption>
+          </figure>
+        </div>
+        <div class="src-line"><a href="https://www.sohu.com/a/1052869057_121123989" target="_blank" rel="noopener noreferrer">搜狐：WAIC 2026 OPC 独立先锋挑战赛八强复盘 ↗</a></div>
+      </div>
+    </div>
+    <div class="oneline rise" style="margin-top:12px"><span>600+ 个项目突围的共同逻辑是深耕垂直行业——今天你会的工具，够做出一个能报名的 Demo。</span><span class="seal stamp green">下届开赛 试试</span></div>
+  </section>
+
+</div>
+
+<!-- 导航 -->
+<div class="hud">
+  <button class="navbtn" id="prev" aria-label="上一页">←</button>
+  <div class="pg hand" id="pg">1 / 5</div>
+  <label class="jump">跳到 <input id="jumpInput" type="number" min="1" placeholder="页码" aria-label="输入页码跳转"> 页</label>
+  <div class="bar"><i id="barFill"></i></div>
+  <div id="pgTitle" style="max-width:34%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap"></div>
+  <button class="navbtn" id="next" aria-label="下一页">→</button>
+</div>
+
+<script src="src/slidekit.js"></script>
+<script src="src/slides/batch1.js"></script>
+<script src="src/slides/batch2.js"></script>
+<script src="src/slides/batch3.js"></script>
+<script src="src/slides/batch4.js"></script>
+<script src="src/slides/proto-mcp.js"></script>
+<script src="src/slides/proto-a2a.js"></script>
+<script src="src/slides/proto-skill.js"></script>
+<script src="src/slides/batch5.js"></script>
+<script src="src/slides/batch6.js"></script>
+<script src="src/slides/batch7.js"></script>
+<script src="src/slides/batch8.js"></script>
+<script src="src/slides/batch9.js"></script>
+<script src="src/slides/batch11.js"></script>
+<script src="src/slides/batch12.js"></script>
+<script src="src/slides/batch13.js"></script>
+<script src="src/slides/batch14.js"></script>
+<script src="src/slides/batch15.js"></script>
+<script src="src/slides/batch16.js"></script>
+<script src="src/slides/batch17.js"></script>
+<script src="src/slides/batch18.js"></script>
+<script src="src/slides/batch19.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>

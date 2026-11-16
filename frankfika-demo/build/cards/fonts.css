@@ -1,0 +1,7 @@
+@font-face{font-family:'Inter';src:url('/fonts/inter-400.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'Inter';src:url('/fonts/inter-800.woff2') format('woff2');font-weight:800;font-display:block}
+@font-face{font-family:'Space Grotesk';src:url('/fonts/sg-500.woff2') format('woff2');font-weight:500;font-display:block}
+@font-face{font-family:'Space Grotesk';src:url('/fonts/sg-700.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:'JetBrains Mono';src:url('/fonts/jb-400.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'JetBrains Mono';src:url('/fonts/jb-600.woff2') format('woff2');font-weight:600;font-display:block}
+@font-face{font-family:'Noto SC';src:url('/fonts/noto-sc.ttf') format('truetype');font-weight:100 900;font-display:block}
