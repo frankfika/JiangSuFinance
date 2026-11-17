@@ -216,7 +216,8 @@
   /* ---- 导航 ---- */
   .hud{position:fixed; left:0; right:0; bottom:0; z-index:10; display:flex; align-items:center; gap:16px;
     padding:14px 28px; font-size:13px; color:var(--muted);
-    background:linear-gradient(to top, var(--paper3) 60%, transparent);}
+    background:linear-gradient(to top, var(--paper3) 60%, transparent);
+    transition:transform .35s var(--ease), opacity .35s var(--ease);}
   .hud .bar{flex:1; height:2px; background:#ddd7cb; position:relative; border-radius:2px}
   .hud .bar i{position:absolute; left:0; top:0; bottom:0; background:var(--ink); width:0; transition:width .4s var(--ease)}
   .navbtn{
@@ -232,12 +233,43 @@
   .jump input{width:58px; padding:7px 8px; border:1px solid var(--line); border-radius:6px; background:var(--paper);
     font-family:var(--hand); font-size:14px; color:var(--ink); text-align:center}
   .jump input:focus{outline:2px solid var(--red); outline-offset:1px}
+
+  /* ---- 全屏 / 沉浸模式 ---- */
+  .modebtn{
+    width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--paper);
+    font-size:17px; color:var(--ink); cursor:pointer; display:grid; place-items:center;
+    transition:all .18s var(--ease);
+  }
+  .modebtn:hover{border-color:var(--ink); transform:translateY(-2px)}
+  .modebtn:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .modebtn.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  /* 沉浸：纸页铺满屏幕，隐藏一切界面元素 */
+  body.immersive .deck{padding:0}
+  body.immersive .slide{
+    inset:0; max-width:none; max-height:none; border-radius:0; border:none;
+    box-shadow:none; padding:56px 64px 72px;
+  }
+  body.immersive .hud{transform:translateY(115%); opacity:0; pointer-events:none}
+  body.immersive .kbd-hint{opacity:0; pointer-events:none}
+  body.immersive .pagefoot{right:34px}
+  /* 全屏（浏览器原生）时同样去掉外圈留白 */
+  body.is-fullscreen .deck{padding:0}
+  body.is-fullscreen .slide{inset:0; max-width:none; max-height:none}
   .pagefoot{position:absolute; right:34px; bottom:16px; font-size:12px; color:var(--muted);
     font-family:var(--hand); letter-spacing:.04em; z-index:2}
   .pagefoot b{color:var(--red); font-weight:normal}
   .arch{margin:14px 0}
   .arch svg{width:100%; height:auto; display:block; background:#fdfcf8; border:1px solid var(--line); border-radius:6px}
-  .kbd-hint{position:fixed; right:28px; top:18px; z-index:10; font-size:11.5px; color:var(--muted); letter-spacing:.06em}
+  .kbd-hint{position:fixed; right:28px; top:18px; z-index:10; font-size:11.5px; color:var(--muted); letter-spacing:.06em; transition:opacity .3s var(--ease)}
+  /* 沉浸模式下的迷你退出按钮（移到屏幕底部才浮现） */
+  .exit-immersive{
+    position:fixed; left:50%; bottom:18px; transform:translate(-50%, 80px); z-index:11;
+    font-size:12.5px; color:var(--muted); background:var(--paper); border:1px solid var(--line);
+    border-radius:99px; padding:7px 18px; cursor:pointer; opacity:0;
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+    box-shadow:0 4px 14px rgba(27,26,24,.12);
+  }
+  body.immersive .exit-immersive{transform:translate(-50%, 0); opacity:1}
   @media (max-width:900px){
     .slide{padding:40px 26px 64px; inset:12px; max-height:calc(100% - 24px)}
     .slide::before{display:none}
@@ -257,7 +289,9 @@
 </head>
 <body>
 
-<div class="kbd-hint">← → 翻页 · 空格 下一页 · 数字键 1–6 直达</div>
+<div class="kbd-hint">← → 翻页 · 空格 下一页 · 数字键 1–6 直达 · F 全屏 · I 沉浸</div>
+
+<button class="exit-immersive" id="exitImmersive" title="退出沉浸模式（快捷键 I）">退出沉浸 · 按 I</button>
 
 <div class="deck" id="deck">
 
@@ -470,6 +504,8 @@
   <label class="jump">跳到 <input id="jumpInput" type="number" min="1" placeholder="页码" aria-label="输入页码跳转"> 页</label>
   <div class="bar"><i id="barFill"></i></div>
   <div id="pgTitle" style="max-width:34%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap"></div>
+  <button class="modebtn" id="fsBtn" title="全屏（F）" aria-label="切换全屏">⛶</button>
+  <button class="modebtn" id="imBtn" title="沉浸模式（I）" aria-label="切换沉浸模式">◉</button>
   <button class="navbtn" id="next" aria-label="下一页">→</button>
 </div>
 

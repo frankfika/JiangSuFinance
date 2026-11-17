@@ -100,7 +100,11 @@
   nextBtn.addEventListener('click', function () { go(current + 1); });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    if (e.target && e.target.tagName === 'INPUT') return; /* 输入框里不打断打字 */
+    var k = e.key.toLowerCase();
+    if (k === 'f') { e.preventDefault(); toggleFullscreen(); }
+    else if (k === 'i') { e.preventDefault(); toggleImmersive(); }
+    else if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
     else if (e.key === 'Home') { go(0); }
     else if (e.key === 'End') { go(slides.length - 1); }
@@ -116,6 +120,33 @@
     if (Math.abs(dx) > 60) go(current + (dx < 0 ? 1 : -1));
     touchX = null;
   }, { passive: true });
+
+  /* ---------- 全屏 / 沉浸模式 ---------- */
+  var fsBtn = document.getElementById('fsBtn');
+  var imBtn = document.getElementById('imBtn');
+  var exitImmersiveBtn = document.getElementById('exitImmersive');
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen && document.exitFullscreen();
+    } else if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(function () { /* 用户可按 F 重试 */ });
+    }
+  }
+  function setImmersive(on) {
+    document.body.classList.toggle('immersive', on);
+    imBtn.classList.toggle('on', on);
+  }
+  function toggleImmersive() { setImmersive(!document.body.classList.contains('immersive')); }
+
+  fsBtn.addEventListener('click', toggleFullscreen);
+  imBtn.addEventListener('click', toggleImmersive);
+  exitImmersiveBtn.addEventListener('click', function () { setImmersive(false); });
+  document.addEventListener('fullscreenchange', function () {
+    var fs = !!document.fullscreenElement;
+    document.body.classList.toggle('is-fullscreen', fs);
+    fsBtn.classList.toggle('on', fs);
+  });
 
   /* ---------- P2 目录 ---------- */
   var tocData = [
