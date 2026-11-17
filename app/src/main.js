@@ -9,20 +9,21 @@
   /* 按讲义逻辑顺序排序（封面在前，未匹配的排最后保持原序） */
   var ORDER = [
     '封面', '开篇演示：一个能聊天的我', '官网现场：打开 frankfika.com', '分身实录：官网的真实操作', '今天八块内容',
+    'AI 已是国家竞争的核心资产', '开源为什么必然胜利', 'AI 主权：开篇五问',
     '分节页：人工智能发展简史',
     '规则系统：把规则写死', '机器学习：从例子里找规律', '深度学习：自己抽特征', '大模型：通用助手',
     '四阶段对照', '课堂互动', '课后就能试：报名 AI 大赛',
     '分节页：大模型基本结构',
     '三要素：数据、算法、算力', '训练像建厂，推理像开工', 'AI 产业链五层',
     '算力三兄弟：CPU、GPU、TPU', '超算、智算与通用算力',
-    '算力卡里面都有什么', '算力禁售时间线', '算力小型化', '模型怎么写出下一句', '架构：Token 生成的循环',
+    '算力卡里面都有什么', '算力禁售时间线', '算力小型化', '戴尔×OpenCSG：智能体超节点', '稠密算力 vs 稀疏算力', '模型怎么写出下一句', '架构：Token 生成的循环',
     'Token 和算力不是一回事', '不同模型、不同语言，消耗不一样',
-    '同样一段中文，不同模型算的是不同的账', '真正的账要两道乘：分词效率 × 单价', '模型的局限',
+    '同样一段中文，不同模型算的是不同的账', '真正的账要两道乘：分词效率 × 单价', '几亿 token 是多少钱', '算力券 vs token 券', '一个 token 的成本账', '为什么 B300 贵，国内买还划算吗', '中国 token 为什么难出海', '模型的局限',
     '多模态的模型', '世界上有多少个模型', '开源和闭源之争', '为什么开源是趋势，本地为什么更需要开源',
     '分节页：常用概念',
     '概念总表', '提示词：布置任务的便签', '上下文：一次能读完的桌面', '幻觉：流畅的假话',
     '知识库：先翻你们准备的文件再答', 'RAG 怎么做', '架构：RAG 检索流程', '财政场景里，RAG 用在哪里',
-    'RAG、知识库和微调：别混', '微调与 LoRA', '智能体：按步骤做事', 'MCP、A2A 与 Skill', 'MCP：智能体的 USB-C 接口', 'A2A：智能体之间怎么协作', 'Skill：把办法沉淀成文件', '架构：MCP·A2A·Skill 协作',
+    'RAG、知识库和微调：别混', '微调与 LoRA', '智能体：按步骤做事', 'MCP：智能体的 USB-C 接口', 'A2A：智能体之间怎么协作', 'Skill：把办法沉淀成文件', '架构：MCP·A2A·Skill 协作',
     '选型五问', 'Harness 工程', 'DeepSeek Harness 深度解读', 'DeepSeek Harness 深度解读（图）', '架构：DeepSeek Harness 内核', 'DeepSeek Harness 的四种模式',
     '分节页：工具专题',
     '先分清：产品名和模型名', '模型巡礼总表',
@@ -64,6 +65,15 @@
     f.innerHTML = '第 <b>' + (i + 1) + '</b> 页 · 共 ' + slides.length + ' 页　<span style="opacity:.65">输入页码可直达</span>';
     s.appendChild(f);
   });
+  /* 正文包进 .slide-body 滚动区，页脚留在纸面底部固定不随内容滚动 */
+  slides.forEach(function (s) {
+    var f = s.querySelector(':scope > .pagefoot');
+    if (!f) return;
+    var body = document.createElement('div');
+    body.className = 'slide-body';
+    while (s.firstChild !== f) body.appendChild(s.firstChild);
+    s.insertBefore(body, f);
+  });
   /* 页码跳转 */
   var jumpInput = document.getElementById('jumpInput');
   function doJump() {
@@ -84,7 +94,9 @@
     slides[current].classList.remove('active');
     current = i;
     slides[current].classList.add('active');
-    slides[current].scrollTop = 0;
+    var sb = slides[current].querySelector(':scope > .slide-body');
+    if (sb) sb.scrollTop = 0; else slides[current].scrollTop = 0;
+    window.scrollTo(0, 0);
     render();
   }
 

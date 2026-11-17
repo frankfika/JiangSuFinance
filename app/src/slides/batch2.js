@@ -1,4 +1,4 @@
-// batch2.js — P15 / P16 / P17 / P19 / P20 / P20A / P24
+// batch2.js — P15 / P16 / P17 / P19 / P20 / P20B / P20A / P24
 (function () {
   var H = '';
 
@@ -171,6 +171,50 @@
   H += SK.img('images/nvidia-dgx-spark.jpg', 'NVIDIA DGX Spark 桌面 AI 超算（官方产品图）', 'DGX Spark：128GB 显存搬上桌面的"小型化旗舰"');
   SK.add('算力小型化', H);
 
+  // P20C 戴尔×OpenCSG 智能体超节点（本地化算力的整机化样板）
+  H = '';
+  H += SK.k('LOCAL AI · SUPER NODE') + SK.h('本地化算力新动向：戴尔 × OpenCSG 智能体超节点');
+  H += SK.sub('2026 年 8 月戴尔科技峰会现场发布——"数据不出园区"的一体化智能体工厂');
+  H += SK.p('2026 年 8 月，<b>2026 戴尔科技峰会</b>（上海）上，OpenCSG 与戴尔联合发布<b>智能体超节点解决方案</b>：以 Dell Pro Max with GB10 为算力底座，硬件、模型仓库、智能体平台<b>一体化交付</b>。同场启动的 OPC 超级个体孵化中心采用本地安全模型集群模式——<b>敏感数据不出园区</b>，为创业者和"一人公司"提供智能算力底座。');
+  H += SK.table(['部件', '干什么', '解决什么痛点'], [
+    ['Dell Pro Max with GB10 计算节点', '桌面形态的 Grace Blackwell 架构，128GB 统一内存全部可供 GPU 使用', '单节点本地加载 70B–200B 量化模型，不依赖云就能做智能体原型与 LoRA 微调'],
+    ['CSGHub 智能中枢', '模型、数据、实验、流水线的统一资产管理', '私有化大模型从"拼手艺"变成"有图纸的工程"'],
+    ['Xnet 智能传输协议', '只传差异数据块：每次提交从 GB 级降到 KB 级，断点续传', '微调迭代的传输时间省 90% 以上'],
+    ['PowerScale 智能存储', '高并发数据后端，热数据全闪、冷数据自动归档分层', 'GPU 不再"饿着"等数据']
+  ]);
+  H += SK.bullets([
+    '扩展路径：单台 GB10 开发机 → 4 台标准集群（K8s + PowerScale + 200GbE）→ 8 台以上生产集群；同一份镜像从试验环境平滑"升舱"到生产，避免"PoC 顺利、生产崩溃"',
+    '<b>对机关的意义</b>：本地化算力正在从"买卡攒机"走向"参考架构整机交付"——数据不出域 + 有图纸验收；但照例要核对模型许可、上线前评测与运维责任'
+  ]);
+  H += SK.oneline('本地化算力，图纸化交付。', '智能体工厂', 'ink');
+  H += SK.img('images/dell-opencsg-supernode.jpg', '戴尔×OpenCSG 智能体超节点发布会现场（2026 戴尔科技峰会）', '发布会现场：一人多高的整机柜超节点，机箱底部 AMD / Intel / Microsoft / NVIDIA 生态标');
+  H += SK.srcline('发布报道', 'https://www.jfdaily.com.cn/news/detail?id=1168752', '解放日报·上观新闻：OpenCSG 与 Dell 联合发布智能体超节点（2026-08-31）');
+  H += SK.srcline('联合架构官方博客', 'https://opencsg.com/blogs/b46be84c-0925-46ad-9e35-7d4fdaf4fae9', 'Dell × OpenCSG 参考架构（OpenCSG 官方博客）');
+  H += SK.srcline('方案解读', 'https://news.sina.cn/ai/2025-12-10/detail-inhaicte9952773.d.html?vt=4', '量子位：戴尔 × OpenCSG 一体化 IT 基础架构方案');
+  SK.add('戴尔×OpenCSG：智能体超节点', H);
+
+  // P20B 稠密算力 vs 稀疏算力
+  H = '';
+  H += SK.k('DENSE VS SPARSE') + SK.h('稠密算力 vs 稀疏算力：同一个"P"，两种说法');
+  H += SK.sub('厂商爱报的 PFLOPS / TOPS 常常按"稀疏口径"算——同样一块卡，数字直接差一倍');
+  H += SK.p('承接前面"防忽悠口诀"的三问——<b>什么精度？稠密还是稀疏？峰值还是实测？</b>这一页把三问里的"稠密还是稀疏"拆透。规则一句话：<b>英伟达 2:4 结构化稀疏</b>，官方口径是"稀疏峰值 = 稠密 × 2"，而且只适用于 Tensor Core 的 AI 矩阵运算——不是所有负载都能蹭到这个倍数。');
+  H += SK.p('打个比方便记：<b>稠密算力像两驱，稀疏算力像四驱</b>。四驱车标称的脱困能力是"特定路况下"才兑现的——烂路上确实翻倍给力，可天天开铺装路面，多出来的两个轮子只是空转。稀疏算力同理：官方那个"×2"只对"矩阵里刚好有大量能省掉的零"的负载生效，而日常推理、训练碰到的矩阵绝大多数是稠密的——等于天天开柏油路。宣传页上的大数字，是这辆车的"四驱模式"成绩，不是它每天的日常表现。');
+  H += SK.table(['卡 / 芯片', '宣传大数字（什么口径）', '稠密实际', '一句话点评'], [
+    ['H100 SXM', 'FP16 1979 TFLOPS（稀疏）', '稠密 989.5，约 1P', '官方规格页大数字默认稀疏口径'],
+    ['H20', 'FP16 约 296（按规则推的稀疏值，官方未直接公布）', '稠密仅 148，H100 的约 1/7', '算力砍了带宽没砍（4.0 TB/s，比 H100 还高）——典型"推理特供卡"'],
+    ['RTX 5090', '"3352 AI TOPS"', 'FP16 稠密 209.5，FP32 仅 104.8 TFLOPS', '营销数字与常用精度差 8–16 倍'],
+    ['DGX Spark（GB10）', '"1 PFLOP FP4"（脚注写明是稀疏理论值）', 'FP16 稠密约 100 TFLOPS 级；内存带宽仅 273 GB/s', '跑大模型卡在带宽不在算力——峰值看看就好']
+  ]);
+  H += SK.bullets([
+    '<b>模型参数里也有同款话术</b>：MoE 模型宣传的是"总参数 vs 激活参数"——Kimi K3 总参数 2.8 万亿、每次只激活约 500 亿；稠密模型（如 DeepSeek-R1 671B）则全部参与。看模型宣传也要问一句"激活多少"。',
+    '<b>口诀的使用姿势</b>：看到 P / TOPS / 参数量的宣传数字，先问三句——什么精度？稠密还是稀疏（总参数还是激活参数）？峰值还是实测？'
+  ]);
+  H += SK.oneline('看到 P 和 TOPS，先问三句话。', '问三句', 'green');
+  H += SK.srcline('NVIDIA 官方规格页', 'https://www.nvidia.com/en-us/data-center/h100/', 'H100 规格页：大数字为稀疏口径');
+  H += SK.srcline('NVIDIA 官网', 'https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/', 'RTX 5090："3352 AI TOPS" 的营销口径');
+  H += SK.srcline('NVIDIA DGX Spark 官方规格页', 'https://www.nvidia.com/en-us/products/workstations/dgx-spark/', 'DGX Spark："1 PFLOP FP4" 脚注写明为稀疏理论值');
+  SK.add('稠密算力 vs 稀疏算力', H);
+
   // P20A 下一句怎么来的
   H = '';
   H += SK.k('NEXT-TOKEN PREDICTION') + SK.h('模型怎么写出下一句');
@@ -179,19 +223,10 @@
     '你输入的是一句话，模型处理的是一串小块（词元/token），<b>一个汉字约 1–2 个</b>。',
     '它做的事很简单也很根本：<b>根据前面已有的内容，猜下一个最合适的词元</b>；猜出一个，再猜下一个。',
     '所以它首先追求"读起来像那么回事"，并不先去业务系统核对每个数字。',
-    '虚构集中在具体处：<b>姓名、日期、数字、文号、出处</b>。格式越标准，越要警惕内容是不是编的。',
-    '<b>顺带认两种"券"</b>：各级政府正在发两类 AI 补贴，别搞混——<b>模型券</b>补的是"调模型 API 的钱"，按 token 用量计价；<b>算力券</b>补的是"租 GPU 的钱"，按卡时/合同计价。'
+    '虚构集中在具体处：<b>姓名、日期、数字、文号、出处</b>。格式越标准，越要警惕内容是不是编的。'
   ]);
-  H += SK.table(['对比', '模型券（token 额度）', '算力券'], [
-    ['买的是什么', '模型服务：直接调 API，按 token 用量扣费', '算力资源：租用 GPU 集群，按卡时或合同计价'],
-    ['谁在发', '政府"模型券"（如上海 3 亿元模型券）＋厂商的充值额度包', '各地政府算力券（湖北按实际用算费补 10%、南京最高补 30%）'],
-    ['适合谁', '用现成模型、数据可以上云的单位和团队', '要自己部署模型、要求数据不出域的单位'],
-    ['关注点', '单价、上下文长度、数据去了哪里', '卡型、租用时长、服务商资质']
-  ]);
+  H += SK.p('顺带认两个新词：模型券（补 API 调用费）和算力券（补 GPU 租金）——各地财政都在发，它们的区别后面专门有一页（见 P22D）。');
   H += SK.oneline('它先求像，再求对——顺序不能反。', '像与对', 'ink');
-  H += SK.srcline('上海市政府', 'https://www.shanghai.gov.cn/rgznsj/20250729/fdd4f7549f904cd7905e3a0a0629ffe1.html', '上海：6 亿元算力券＋3 亿元模型券，两类补贴并列');
-  H += SK.srcline('湖北省数据局', 'https://sjj.hubei.gov.cn/bmdt/tzgg/202511/t20251113_5812513.shtml', '湖北算力券：按智算/超算实际用算费的 10% 补贴');
-  H += SK.srcline('南京市宁企通', 'https://nqt.nanjing.gov.cn/nqtmh/njyst/pages/gxhxzdetail?guid=4987a4ce-6f17-4f2d-8cf9-030668d60607', '南京算力券：智能算力合同结算额最高补 30%');
   H += SK.srcline('可视化课程', 'https://www.3blue1brown.com/lessons/attention/', '3Blue1Brown：注意力机制逐步拆解（动画）');
   H += SK.srcline('图解博客', 'https://jalammar.github.io/illustrated-transformer/', 'The Illustrated Transformer：被引用最多的图解');
   H += SK.srcline('动手视频', 'https://youtu.be/kCc8FmEb1nY', 'Andrej Karpathy：从零手写一个 GPT（2 小时）');

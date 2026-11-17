@@ -11,12 +11,12 @@
     '<b>CSGShip</b>：智能体构建与运行平台——和 CSGHub 正好凑成"造智能体 + 管智能体"的一对',
     '私有化部署：<b>Docker Compose / K8s</b>，最低 4C8G；适配昇腾、海光、寒武纪等国产芯片与麒麟、统信系统；线上社区 10 万+ 模型、1 万+ MCP 服务可同步进内网'
   ]);
-  H += SK.p('2026 年 9 月，OpenCSG 与 Dell 联合发布了<b>超节点参考架构</b>（CSGHub + Xnet 传输协议 + PowerScale 存储 + GB10 计算节点）：本地单节点跑 70B–200B 量化模型，微调迭代传输时间省 90%+——"私有化大模型"从拼手艺开始变成<b>有参考图纸的工程</b>。');
+  H += SK.p('2026 年 8 月，OpenCSG 与 Dell 在<b>2026 戴尔科技峰会</b>上联合发布了<b>智能体超节点</b>（CSGHub + Xnet 传输协议 + PowerScale 存储 + GB10 计算节点）：本地单节点跑 70B–200B 量化模型，微调迭代传输时间省 90%+——"私有化大模型"从拼手艺开始变成<b>有参考图纸的工程</b>。');
   H += SK.img('images/csghub.png', 'CSGHub 产品界面', 'CSGHub：私有化的大模型资产仓库');
   H += SK.oneline('把模型当资产管，才谈得上治理。', '资产台账', 'ink');
   H += SK.srcline('产品页', 'https://opencsg.com/csghub', 'opencsg.com/csghub（产品页与文档）');
   H += SK.srcline('源码', 'https://github.com/OpenCSGs/csghub', 'OpenCSGs/csghub（Apache 2.0）');
-  H += SK.srcline('联合架构', 'https://opencsg.com/blogs/b46be84c-0925-46ad-9e35-7d4fdaf4fae9', 'Dell × OpenCSG 超节点参考架构（2026-09 官方博客）');
+  H += SK.srcline('联合架构', 'https://opencsg.com/blogs/b46be84c-0925-46ad-9e35-7d4fdaf4fae9', 'Dell × OpenCSG 联合架构（OpenCSG 官方博客，2025-11）');
   H += SK.srcline('社区', 'https://opencsg.com', 'opencsg.com 开放传神社区');
   SK.add('认识 OpenCSG', H);
 

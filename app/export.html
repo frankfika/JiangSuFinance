@@ -25,17 +25,19 @@
   .deck{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:24px;}
   .slide{
     position:absolute; inset:24px; max-width:1180px; max-height:calc(100% - 48px); margin:auto;
+    display:flex; flex-direction:column;
     background:var(--paper);
     background-image:
       radial-gradient(circle at 18% 12%, rgba(27,26,24,.025), transparent 42%),
       radial-gradient(circle at 85% 88%, rgba(200,68,47,.03), transparent 46%);
     border:1px solid var(--line); border-radius:6px;
     box-shadow:0 1px 0 #fff inset, 0 14px 44px rgba(27,26,24,.10), 0 2px 8px rgba(27,26,24,.06);
-    padding:56px 64px 72px; overflow-y:auto;
+    padding:56px 64px 72px; overflow:hidden;
     opacity:0; visibility:hidden; transform:translateY(14px) scale(.985);
     transition:opacity .45s var(--ease), transform .45s var(--ease), visibility 0s linear .45s;
   }
   .slide.active{opacity:1; visibility:visible; transform:none; transition-delay:0s}
+  .slide-body{flex:1; min-height:0; overflow-y:auto}
   .slide::before{ /* 装订线 */
     content:""; position:absolute; left:34px; top:0; bottom:0; width:1px; background:var(--line);
   }
@@ -160,11 +162,11 @@
   .mc-t{font-weight:600; font-size:15px; margin:4px 0 6px; font-family:var(--hand)}
   .mc-b{font-size:13px; color:var(--ink2); line-height:1.7}
   .shot{margin:10px 0 14px}
-  .shot img{max-width:100%; max-height:540px; border:1px solid var(--line); border-radius:5px; display:block}
+  .shot img{max-width:100%; max-height:min(540px,60vh); border:1px solid var(--line); border-radius:5px; display:block}
   .shot figcaption{font-size:12px; color:var(--muted); margin-top:6px}
   .shotrow{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:10px 0 14px}
   .shotrow figure{margin:0}
-  .shotrow img{width:100%; max-height:360px; object-fit:contain; object-position:top; background:var(--paper2); border:1px solid var(--line); border-radius:5px; display:block}
+  .shotrow img{width:100%; max-height:min(360px,42vh); object-fit:contain; object-position:top; background:var(--paper2); border:1px solid var(--line); border-radius:5px; display:block}
   .shotrow figcaption{font-size:12px; color:var(--muted); margin-top:5px}
   @media (max-width:640px){.shotrow{grid-template-columns:1fr}}
   /* ---- 长截图分栏 ---- */
@@ -224,9 +226,15 @@
   .jump input{width:58px; padding:7px 8px; border:1px solid var(--line); border-radius:6px; background:var(--paper);
     font-family:var(--hand); font-size:14px; color:var(--ink); text-align:center}
   .jump input:focus{outline:2px solid var(--red); outline-offset:1px}
-  .pagefoot{position:absolute; right:34px; bottom:16px; font-size:12px; color:var(--muted);
-    font-family:var(--hand); letter-spacing:.04em; z-index:2}
+  .pagefoot{
+    align-self:flex-end; margin:0 34px 16px 0;
+    font-size:12px; color:var(--muted); white-space:nowrap;
+    font-family:var(--hand); letter-spacing:.04em; z-index:2;
+    background:var(--paper); border:1px solid var(--line); border-radius:99px;
+    padding:3px 12px; box-shadow:0 2px 8px rgba(27,26,24,.08);
+  }
   .pagefoot b{color:var(--red); font-weight:normal}
+  .slide img{max-width:100%; height:auto}
   .arch{margin:14px 0}
   .arch svg{width:100%; height:auto; display:block; background:#fdfcf8; border:1px solid var(--line); border-radius:6px}
   .kbd-hint{position:fixed; right:28px; top:18px; z-index:10; font-size:11.5px; color:var(--muted); letter-spacing:.06em}
@@ -284,7 +292,8 @@
   .shot figcaption{font-size:10px; margin-top:3px}
   .shotrow img{max-height:250px; object-fit:contain; background:var(--paper2)}
   .shotrow figcaption{font-size:10px}
-  .pagefoot{right:22px; bottom:10px; font-size:10px}
+  .pagefoot{position:absolute; right:22px; bottom:10px; margin:0; font-size:10px}
+  .slide-body{overflow:visible !important; flex:none !important; height:auto !important}
   .arch svg{max-height:300px}
   .rise{opacity:1 !important; transform:none !important}
   .seal{transform:rotate(-6deg) !important; opacity:1 !important}
