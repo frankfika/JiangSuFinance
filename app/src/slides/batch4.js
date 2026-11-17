@@ -115,7 +115,7 @@
       '和传统框架的区别：传统框架想换一环要改源码；它换模型、换审批策略，挂个插件就行。'
     ])
     + SK.srcline('源码', 'https://github.com/deepseek-ai/deepseek-harness', 'deepseek-ai/deepseek-harness')
-    + SK.img('images/dsh-readme.png', 'dsh 命令行入口文档：dsh web 一条命令起 Web UI，dsh plugin 管理插件', 'IT之家报道截图：@deepseek-ai/dsh 文档')
+    + SK.img('images/dsh-readme.jpg', 'dsh 命令行入口文档：dsh web 一条命令起 Web UI，dsh plugin 管理插件', 'IT之家报道截图：@deepseek-ai/dsh 文档')
     + SK.srcline('报道', 'https://www.ithome.com/0/989/446.htm', 'IT之家：DeepSeek Harness 公测，同步开放插件生态');
   SK.add('Harness 工程', H);
 
@@ -146,8 +146,8 @@
   H += SK.k('DeepSeek Harness') + SK.h('DeepSeek Harness 深度解读 · 看图')
     + SK.sub('一个内核 + 一切皆插件：仓库、Web UI、插件面板长什么样。');
   H += SK.img('images/deepseek-harness.png', 'DeepSeek Harness GitHub 仓库首页', 'GitHub 仓库首页')
-    + SK.img('images/dsh-webui.png', 'dsh Web UI「探索未至之境」预览版：标准 / PTC / 极简 / 创造四种模式', 'IT之家报道截图：Web UI')
-    + SK.img('images/dsh-plugins.png', '插件管理面板：模型、工具、沙箱、存储、循环、调度全是可装卸的插件', 'IT之家报道截图：插件列表')
+    + SK.img('images/dsh-webui.jpg', 'dsh Web UI「探索未至之境」预览版：标准 / PTC / 极简 / 创造四种模式', 'IT之家报道截图：Web UI')
+    + SK.img('images/dsh-plugins.jpg', '插件管理面板：模型、工具、沙箱、存储、循环、调度全是可装卸的插件', 'IT之家报道截图：插件列表')
     + SK.srcline('源码', 'https://github.com/deepseek-ai/deepseek-harness', 'deepseek-ai/deepseek-harness');
   SK.add('DeepSeek Harness 深度解读（图）', H);
 })();

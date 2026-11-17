@@ -248,7 +248,7 @@
     '标志性事件：<b>2026 年 9 月</b>英伟达宣布约 <b>129 亿美元</b>收购 Hugging Face——全球最大 GPU 厂商买下全球最大开源模型分发平台',
     '结论：开源生态已是<b>基础设施级战略资产</b>'
   ]);
-  H += SK.img('images/nvidia-huggingface.png', '英伟达收购 Hugging Face 新闻配图（NVIDIA 与 Hugging Face 吉祥物同框）', 'winzheng.com 报道封面图');
+  H += SK.img('images/nvidia-huggingface.jpg', '英伟达收购 Hugging Face 新闻配图（NVIDIA 与 Hugging Face 吉祥物同框）', 'winzheng.com 报道封面图');
   H += SK.srcline('报道原文', 'https://www.winzheng.com/article/nvidia-acquires-hugging-face-for-12-9-billion', '英伟达 129 亿美元收购 Hugging Face，开源平台中立性面临考验');
   H += SK.srcline('官网', 'https://huggingface.co/', 'Hugging Face');
   H += SK.oneline('开源不只是免费，是数据路径自己说了算。', '数据路径', 'ink');

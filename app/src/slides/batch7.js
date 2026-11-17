@@ -108,7 +108,7 @@ H += SK.bullets([
   '循环回到"提示词和模型"，而不是"计划"'
 ]);
 H += SK.p('AI 不是一次交付的软件，而是持续迭代的"员工"——模型版本要跟踪、表现要回归评测、权限要定期复核、出问题要能回滚。');
-H += SK.img('images/devops-infinity-loop.png', 'DevOps 无限循环经典图', 'DevOps 无限循环（来源 ManageEngine 官方文章页）');
+H += SK.img('images/devops-infinity-loop.jpg', 'DevOps 无限循环经典图', 'DevOps 无限循环（来源 ManageEngine 官方文章页）');
 H += SK.srcline('来源', 'https://www.manageengine.com/products/service-desk/itsm/devops-lifecycle-and-pipeline.html', 'ManageEngine：DevOps Lifecycle and Pipeline');
 SK.add('DevOps 与 AgenticOps', H); H='';
 

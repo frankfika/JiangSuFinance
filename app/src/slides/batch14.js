@@ -55,7 +55,7 @@
   );
   H += SK.p('<b>一个必须讲的插曲（2026 年 4 月）</b>：中国团队 EvoMap 发布技术对比报告，实锤 Hermes Agent 的"技能进化系统"架构级抄袭了他们早一个月开源的 Evolver——十步进化主循环 1:1 复刻、12 组核心术语系统性替换（Gene→SKILL.md、Capsule→技能执行记录）。GitHub <b>8.5 万星</b>的顶流项目，抄了 <b>1800 星</b>的小团队。');
   H += SK.oneline('开源协议保护代码，但保护不了"想法"吗？', '成长', 'ink');
-  H += SK.img('images/hermes-repo.png', 'NousResearch/hermes-agent GitHub 仓库首页', 'GitHub 仓库：26 万+ Star 的"会成长"智能体');
+  H += SK.img('images/hermes-repo.jpg', 'NousResearch/hermes-agent GitHub 仓库首页', 'GitHub 仓库：26 万+ Star 的"会成长"智能体');
   H += SK.srcline('GitHub', 'https://github.com/NousResearch/hermes-agent', 'NousResearch/hermes-agent');
   H += SK.srcline('Nous Research', 'https://nousresearch.com', 'nousresearch.com（机构官网与模型线）');
   SK.add('Hermes Agent 拆解：另一只"会成长的"开源智能体', H);

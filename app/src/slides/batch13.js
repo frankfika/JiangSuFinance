@@ -32,7 +32,7 @@
     '公司面：港股上市，上半年营收 <b>9.54 亿元（+400%）</b>，仍亏损。'
   ]);
   H += SK.oneline('同一个基座，全靠后训练拉开差距。', '炼方法', 'ink');
-  H += SK.img('images/aws-bedrock-glm53.png', 'GLM-5.3 上架 AWS Bedrock 的公告截图', '国产开源模型走进海外云市场');
+  H += SK.img('images/aws-bedrock-glm53.jpg', 'GLM-5.3 上架 AWS Bedrock 的公告截图', '国产开源模型走进海外云市场');
   H += SK.img('images/glm.png', '智谱 BigModel 官网：不止模型，构建可信智能', '官网截图：GLM-5.3 / FlashX / Coding Plan');
   H += SK.srcline('官网', 'https://www.zhipuai.cn/', '智谱');
   H += SK.srcline('云平台', 'https://aws.amazon.com/bedrock/', 'AWS Bedrock 模型市场');

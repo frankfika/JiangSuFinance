@@ -17,7 +17,7 @@
     ['dsh web', '一条命令起 Web 界面'],
     ['dsh plugin --profile &lt;name&gt;', '管理插件（装、卸、看依赖）']
   ]);
-  H += SK.img('images/dsh-webui.png', 'dsh Web UI「探索未至之境」预览版：标准 / PTC / 极简 / 创造四种模式', 'IT之家报道截图：四种模式在 Web UI 里就是四个入口');
+  H += SK.img('images/dsh-webui.jpg', 'dsh Web UI「探索未至之境」预览版：标准 / PTC / 极简 / 创造四种模式', 'IT之家报道截图：四种模式在 Web UI 里就是四个入口');
   H += SK.oneline('选模式就是选装哪些插件——模式即装配单。', '装配单', 'ink');
   H += SK.srcline('报道', 'https://www.ithome.com/0/989/446.htm', 'IT之家：DeepSeek Harness 四种模式原文');
   H += SK.srcline('源码', 'https://github.com/deepseek-ai/deepseek-harness', 'deepseek-ai/deepseek-harness');

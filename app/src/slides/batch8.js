@@ -53,7 +53,7 @@
       '<b>权限是产品决策本身</b>：用户最终评判的是“它背着我能干什么”'
     ]) +
     SK.oneline('从安静开始，用评测调节奏，慢慢赢得更多注意力。', '从安静开始') +
-    SK.img('images/anthropic-article.png', 'Anthropic 官方文章页：Building always-on agents（2026-11-13）', '原文页面截图：五部件与三条忠告') +
+    SK.img('images/anthropic-article.jpg', 'Anthropic 官方文章页：Building always-on agents（2026-11-13）', '原文页面截图：五部件与三条忠告') +
     SK.srcline('原文出处', 'https://claude.com/resources/articles/building-always-on-agents', 'Anthropic《Building always-on agents》2026-11-13');
   SK.add('深读：Anthropic 篇', H);
 

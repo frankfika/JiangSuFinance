@@ -73,8 +73,8 @@
   H += shotrow([
     ['images/workbuddy-top.jpg', 'WorkBuddy 官网：全场景 AI 办公工作台'],
     ['images/claude-cowork-top.jpg', 'claude.com：9 月起 Cowork 并入统一入口'],
-    ['images/doubao-work.png', '豆包电脑版："对话 / 工作"双模式'],
-    ['images/qwenwork.png', '千问办公客户端：从任务到交付']
+    ['images/doubao-work.jpg', '豆包电脑版："对话 / 工作"双模式'],
+    ['images/qwenwork.jpg', '千问办公客户端：从任务到交付']
   ]);
   H += SK.oneline('不只给建议，直接操作电脑交付成果。', '办公', 'green');
   H += SK.srcline('财新封面报道', 'https://weekly.caixin.com/2026-10-09/102491720.html', '《抢占办公室》：互联网巨头争夺 AI 办公入口');
@@ -102,7 +102,7 @@
     '远程遥控：在企业微信 / QQ / 飞书 / 钉钉里发指令，电脑端与云端继续执行',
     '短板也摆出来：积分消耗偏快、长任务偶发卡顿、PPT 版式终稿仍需人工调整——<b>对外公文、含关键数字的交付物必须人工复核</b>'
   ]);
-  H += SK.img('images/workbuddy.png', 'WorkBuddy 官网与客户端', '官网首页 + 客户端：新建任务 / 助理 / 项目 / 专家·技能·连接器，一句话"今天帮你做些什么？"');
+  H += SK.img('images/workbuddy.jpg', 'WorkBuddy 官网与客户端', '官网首页 + 客户端：新建任务 / 助理 / 项目 / 专家·技能·连接器，一句话"今天帮你做些什么？"');
   H += SK.oneline('国内办公 Agent 的第一张名片：入口在企业微信里。', 'WorkBuddy', 'green');
   H += SK.srcline('WorkBuddy 官网', 'https://www.workbuddy.cn', 'workbuddy.cn（下载 / 定价 / 文档）');
   H += SK.srcline('QuestMobile 行业数据转引', 'https://news.mydrivers.com/1/1157/1157306.htm', '2026 年 7 月 AI 办公 Agent 行业报告：WorkBuddy 月活第一');
@@ -153,7 +153,7 @@
     '内置与推荐技能合计 <b>106 个</b>；可组建多 Agent 工作小队（数据、研究、设计并行）',
     '飞书深度打通：登录后继承权限内的聊天记录、文档、会议纪要、日程；产出沉淀回飞书，变成企业可复用知识库'
   ]);
-  H += SK.img('images/doubao-work.png', '豆包电脑版"工作"模式', '豆包电脑版界面：左侧"新工作任务 / 项目"，中央"对话 / 工作"双模式切换');
+  H += SK.img('images/doubao-work.jpg', '豆包电脑版"工作"模式', '豆包电脑版界面：左侧"新工作任务 / 项目"，中央"对话 / 工作"双模式切换');
   H += SK.oneline('路径越短，黏性越强——上下文就是生产力。', '上下文', 'green');
   H += SK.srcline('IT之家发布报道', 'https://www.ithome.com/0/993/865.htm', '字节跳动发布"豆包工作"，与飞书深度打通（2026-08-25）');
   SK.add('深看：豆包工作（字节）', H);
@@ -178,7 +178,7 @@
     '典型玩法：律师做完尽调报告，一键沉淀为"组织级 Skill"向全团队共享；跨国企业用它自动生成英文文档、7×24 在线协同',
     '公测注册送 2000 积分、首周每日登录再领 500–2000；独立 App 端与国际版在规划中'
   ]);
-  H += SK.img('images/qwenwork.png', '千问办公客户端', '官方产品图："上午好，千问办公，有什么需要我搞定的？"——任务、扩展、专家套件、连接器、定时任务');
+  H += SK.img('images/qwenwork.jpg', '千问办公客户端', '官方产品图："上午好，千问办公，有什么需要我搞定的？"——任务、扩展、专家套件、连接器、定时任务');
   H += SK.oneline('三合一不是拼盘，是把三条技术线拧成一股绳。', '整合', 'green');
   H += SK.srcline('经济观察网', 'http://www.eeo.com.cn/2026/0803/985067.shtml', '《钉钉震荡两个月后，千问办公三合一》（2026-08-03）');
   H += SK.srcline('千问办公公测报道', 'https://tech.ifeng.com/c/8vHiigz6OT8', '凤凰网科技：整合 QoderWork / MuleRun / 悟空，搭载 Qwen3.8');
@@ -315,7 +315,7 @@
     ]
   );
   H += SK.oneline('同一个模型，套上渲染工具链，就从"写代码的"变成"做视频的"。', '工具链', 'green');
-  H += SK.img('images/claude-code.png', 'Claude Code 产品页：Hand Claude a bug, fix test, or multi-day migration', '官网截图：把任务交给它，多日干完整件事');
+  H += SK.img('images/claude-code.jpg', 'Claude Code 产品页：Hand Claude a bug, fix test, or multi-day migration', '官网截图：把任务交给它，多日干完整件事');
   H += SK.srcline('Remotion 官方教程', 'https://www.remotion.dev/docs/ai/coding-agents', '用编码代理写视频');
   H += SK.srcline('Claude Code 官方文档', 'https://code.claude.com/docs/zh-cn/overview', 'code.claude.com/docs（Claude Code 是什么）');
   SK.add('Claude Code 做视频', H);

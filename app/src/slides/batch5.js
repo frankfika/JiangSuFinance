@@ -11,9 +11,9 @@
     ]) +
     SK.p('Dify 适合有技术团队、要把 AI 应用接到内部系统的单位；FastGPT 求快求稳；MaxKB 走正式采购与原厂服务路径；ima 适合处室级快速建一个政策文件问答库。') +
     '<div class="shotrow rise">' +
-    '<figure><img src="images/dify.png" alt="Dify 界面"/><figcaption>Dify · 可视化编排工作台</figcaption></figure>' +
-    '<figure><img src="images/fastgpt.png" alt="FastGPT 界面"/><figcaption>FastGPT · 知识库问答</figcaption></figure>' +
-    '<figure><img src="images/maxkb.png" alt="MaxKB 界面"/><figcaption>MaxKB · 企业知识库</figcaption></figure>' +
+    '<figure><img src="images/dify.jpg" alt="Dify 界面"/><figcaption>Dify · 可视化编排工作台</figcaption></figure>' +
+    '<figure><img src="images/fastgpt.jpg" alt="FastGPT 界面"/><figcaption>FastGPT · 知识库问答</figcaption></figure>' +
+    '<figure><img src="images/maxkb.jpg" alt="MaxKB 界面"/><figcaption>MaxKB · 企业知识库</figcaption></figure>' +
     '<figure><img src="images/tencent-ima.png" alt="腾讯 ima 界面"/><figcaption>ima · 导入即建库</figcaption></figure>' +
     '</div>' +
     SK.srcline('官方仓库', 'https://github.com/langgenius/dify', 'Dify') +

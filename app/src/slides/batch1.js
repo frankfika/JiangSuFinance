@@ -50,7 +50,7 @@
     '<b>财政例子</b>：用历史支付数据筛“疑似异常”清单——年末集中支付、拆单规避招标限额',
     '<b>一个教训</b>：美国医疗模型用“历史花费”代替“病情”，系统性低估黑人患者风险——数据里藏着什么偏见，模型就放大什么偏见'
   ]);
-  H += SK.img('images/ml-rspamd-webui.png', '垃圾邮件过滤系统的真实后台', '一个开源垃圾邮件过滤系统的真实后台：BAYES_HAM / BAYES_SPAM 就是“贝叶斯学习”的计数——机器在看邮件中自己学出来的统计规律，不是人写的规则。');
+  H += SK.img('images/ml-rspamd-webui.jpg', '垃圾邮件过滤系统的真实后台', '一个开源垃圾邮件过滤系统的真实后台：BAYES_HAM / BAYES_SPAM 就是“贝叶斯学习”的计数——机器在看邮件中自己学出来的统计规律，不是人写的规则。');
   H += arch([
     ['① 数据采集', '从业务系统、日志汇集原始数据——流水线的“原料仓”'],
     ['② 数据标注', '给历史数据打“标准答案”：这笔交易=欺诈/正常，这封邮件=垃圾/正常'],
@@ -84,7 +84,7 @@
     ['可解释性', '相对讲得清“为什么这样判”', '基本是黑箱'],
     ['最擅长', '表格数据：评分、风控、审批', '图像、语音、文字：识别类任务']
   ]);
-  H += '<div class="shotrow rise"><figure><img src="images/dl-face-detection.jpg" alt="人脸检测实拍"/><figcaption>人脸检测实拍：机器自动框出每张脸——“看得懂图”的最直观样子。（公有领域图片，Wikimedia Commons）</figcaption></figure><figure><img src="images/dl-alphafold2.png" alt="AlphaFold 预测结构对比"/><figcaption>AlphaFold 的预测结构（蓝）与实验测得结构（灰）几乎完全重合——深度学习开始帮科学家做发现。（Jumper et al., Nature 2021, CC BY 4.0）</figcaption></figure></div>';
+  H += '<div class="shotrow rise"><figure><img src="images/dl-face-detection.jpg" alt="人脸检测实拍"/><figcaption>人脸检测实拍：机器自动框出每张脸——“看得懂图”的最直观样子。（公有领域图片，Wikimedia Commons）</figcaption></figure><figure><img src="images/dl-alphafold2.jpg" alt="AlphaFold 预测结构对比"/><figcaption>AlphaFold 的预测结构（蓝）与实验测得结构（灰）几乎完全重合——深度学习开始帮科学家做发现。（Jumper et al., Nature 2021, CC BY 4.0）</figcaption></figure></div>';
   H += arch([
     ['输入层', '原材料直接上桌：图像的像素、声音的波形——不再经过人的特征加工'],
     ['隐藏层 · 浅层', '机器自己先认出最基本的东西：边缘、线条、纹理、音素'],
